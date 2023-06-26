@@ -21776,13 +21776,6 @@ COM *** Safe Deposit Field Analysis ********************************************
 
   ASSIGN SDP00701FileName "SDP00701 Field Mapping Review %fileDate%"
   ASSIGN SDP00701FileName "SDP00701 Field Mapping Review %fileDate% No Errors Found" IF COUNT1 = 0
-^BATCH    s1_Main_Variables                                                   
-[PARENT_FOLDER_ID] 1655233995
-ASSIGN fileDate = TRIM(DATE(TODAY(), "YYYYMMDD")) + TIME(NOW(),"hhmmss")
-
- ASSIGN fileLocation = "\\s-acl-audit-01\ACL Data\Loan Operations\Conversion\"
-
-com ASSIGN fileLocation = "C:\"
 ^LOGFILE  Charter_Consolidation                                                                                                                                                                                                                                                "" "Charter_Consolidation.LOG"
 [PARENT_FOLDER_ID] 0
 ^BATCH    s2_Debit_Card_Join_Tables                                           
@@ -21856,13 +21849,20 @@ COM ***** Debit Card Join Tables ***********************************************
 
     DMSTAT IF ISBLANK(DMSTAT) <> T
     LNSTAT
+^BATCH    s1_Main_Variables                                                   
+[PARENT_FOLDER_ID] 1655233995
+ASSIGN fileDate = TRIM(DATE(TODAY(), "YYYYMMDD")) + TIME(NOW(),"hhmmss")
+
+ ASSIGN fileLocation = "\\s-acl-audit-01\ACL Data\Loan Operations\Conversion\"
+
+ ASSIGN fileLocation = "C:\"
 ^OPEN b,T,s1_Time_Field_Mapping_Analysis;b,T,s3_Common_Import_Source_Files;b,T,s0_Time_Main;b,T,s0_Tran_Main;b,T,s2_Tran_Join_Tables;b,T,s1_Main_Variables;b,T,s0_Loans_Main;b,T,s1_Loan_Field_Mapping_Analysis;b,T,s0_SDB_Main;
 ^ROBOT 55803
 [SUBDOMAIN] heartland-financial-usa-inc
 [PROFILE] RobotsProfile
 [PORT] 10000
-[PREFIX] D:\acl\robots\aclse\
 [REGION] us
 [VERSION] 55
+[PREFIX] D:\acl\robots\aclse\
 [ADDRESS] 10.4.1.233
 [NAME] Charter Test
