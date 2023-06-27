@@ -2169,7 +2169,7 @@ OPEN t_AAP00801_Unmatched_Files_DV
 EXPORT FIELDS ALL XLSX TO "%fileLocation%Charter Consolidation\Output\Tran\Missing Records\AAP00801 Missing Records %fileDate%" WORKSHEET Sheet1
 ^BATCH    s2_Loans_Missing_Records_Export                                     
 [PARENT_FOLDER_ID] 1655238803
-COM ******Loan Missing Export*************************************
+COM ******Loan Missing Accounts Export*************************************
 
 OPEN t_Both_LNP003_Unmatched_DV
 EXPORT FIELDS LNBK LNNOTE LNSHRT LNTYPE LNSTAT LNCHGF LNCHGD XLSX TO "%fileLocation%Charter Consolidation\Output\Loan\Missing Records\Loan LNP003 Missing Records %fileDate%" WORKSHEET Sheet1
