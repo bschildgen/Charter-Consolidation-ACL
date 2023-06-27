@@ -21799,7 +21799,7 @@ COM *** Import Data ************************************************************
   SET FOLDER /Joined_Tables
    DO s4_Join_Tables
    DO s2_Loans_Join_Tables
-   DO s2_CIF_Join_Table
+   DO s2_CIF_Join_Tables
    DO s2_FTM_Join_Tables
    DO s2_SDB_Join_Tables
    DO s2_Time_Join_Tables
