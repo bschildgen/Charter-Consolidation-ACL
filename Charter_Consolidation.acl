@@ -1484,103 +1484,6 @@ COM *** Generate Mapping Fields ************************************************
 COM *** Export Mapping Errors **********************************************************************
 
     DO s2_Loans_Field_Mapping_Export
-^BATCH    s0_Main                                                             
-[PARENT_FOLDER_ID] 1655233995
-COMMENT
-//ANALYTIC Charter_Consolidation
-//RESULT LOG CHARTER_CONSOLIDATION_LOG
-END
-
-
-COM ************************************************************************************************
-COM *** Initialization *****************************************************************************
-COM ************************************************************************************************
-
- SET SAFETY OFF
- CLOSE PRIMARY SECONDARY
- SET LOG TO CHARTER_CONSOLIDATION_LOG
-
-COM ************************************************************************************************
-COM *** Core Logic *********************************************************************************
-COM ************************************************************************************************
-
-
-
-COM *** Import Data ********************************************************************************
-
-
- 
-   DO s1_Main_Variables
-
-  SET FOLDER /Source
-   DO s1_Loans_Import_Source_Files
-   DO s1_CIF_Import_Source_Files
-   DO s1_FTM_Import_Source_Files
-   DO s1_SDB_Import_Source_Files
-   DO s1_Time_Import_Source_Files
-   DO s1_Tran_Import_Source_Files
-   DO s3_Common_Import_Source_Files
-
-  SET FOLDER /Joined_Tables
-   DO s4_Join_Tables
-   DO s2_Loans_Join_Tables
-   DO s2_CIF_Join_Tables
-   DO s2_FTM_Join_Tables
-   DO s2_SDB_Join_Tables
-   DO s2_Time_Join_Tables
-   DO s2_Tran_Join_Tables
-
-COM *** Run Analysis ********************************************************************************
-
-   DO s0_SDB_Product_Mapping
-
-   DO s0_SDB_Field_Mapping   
-   
-   DO s0_FTM_Field_Mapping
-
-   DO s0_CIF_Branch_Mapping
-
-   DO s0_CIF_Officer_Mapping
-
-   DO s0_CIF_Field_Mapping
-
-   DO s0_Time_Branch_Mapping
-
-   DO s0_Time_Officer_Mapping
-
-   DO s0_Time_Field_Mapping
-
-   DO s0_Loans_Branch_Mapping
-   
-   DO s0_Loans_Fee_Mapping
-
-   DO s0_Loans_Officer_Mapping
-
-   DO s0_Loans_Field_Mapping
-
-   DO s0_Tran_Branch_Mapping
-
-   DO s0_Tran_Officer_Mapping
-
-   DO s0_Tran_Product_Mapping
-
-   DO s0_Tran_Field_Mapping
-
-   DO s0_SDB_Missing_Records_Mapping
-
-   DO s0_FTM_Missing_Records_Mapping
-
-   DO s0_CIF_Missing_Records_Mapping   
-
-   DO s0_Time_Missing_Records_Mapping
-
-   DO s0_Loans_Missing_Records_Mapping
-
-   DO s0_Tran_Missing_Records_Mapping
-
-com  DO s0_Debit_Card_Field_Mapping
-
-com  DO s0_Debit_Card_Missing_Records_Mapping
 ^BATCH    s0_CIF_Main                                                         
 [PARENT_FOLDER_ID] 1655233075
 COMMENT
@@ -21856,13 +21759,110 @@ ASSIGN fileDate = TRIM(DATE(TODAY(), "YYYYMMDD")) + TIME(NOW(),"hhmmss")
  ASSIGN fileLocation = "\\s-acl-audit-01\ACL Data\Loan Operations\Conversion\"
 
  ASSIGN fileLocation = "C:\"
-^OPEN b,T,s1_Time_Field_Mapping_Analysis;b,T,s3_Common_Import_Source_Files;b,T,s0_Time_Main;b,T,s0_Tran_Main;b,T,s2_Tran_Join_Tables;b,T,s1_Main_Variables;b,T,s0_Loans_Main;b,T,s1_Loan_Field_Mapping_Analysis;b,T,s0_SDB_Main;
+^BATCH    s0_Main                                                             
+[PARENT_FOLDER_ID] 1655233995
+COMMENT
+//ANALYTIC Charter_Consolidation
+//RESULT LOG CHARTER_CONSOLIDATION_LOG
+END
+
+
+COM ************************************************************************************************
+COM *** Initialization *****************************************************************************
+COM ************************************************************************************************
+
+ SET SAFETY OFF
+ CLOSE PRIMARY SECONDARY
+ SET LOG TO CHARTER_CONSOLIDATION_LOG
+
+COM ************************************************************************************************
+COM *** Core Logic *********************************************************************************
+COM ************************************************************************************************
+
+
+
+COM *** Import Data ********************************************************************************
+
+
+ 
+   DO s1_Main_Variables
+
+  SET FOLDER /Source
+   DO s1_Loans_Import_Source_Files
+   DO s1_CIF_Import_Source_Files
+   DO s1_FTM_Import_Source_Files
+   DO s1_SDB_Import_Source_Files
+   DO s1_Time_Import_Source_Files
+   DO s1_Tran_Import_Source_Files
+   DO s3_Common_Import_Source_Files
+
+  SET FOLDER /Joined_Tables
+   DO s4_Join_Tables
+   DO s2_Loans_Join_Tables
+   DO s2_CIF_Join_Table
+   DO s2_FTM_Join_Tables
+   DO s2_SDB_Join_Tables
+   DO s2_Time_Join_Tables
+   DO s2_Tran_Join_Tables
+
+COM *** Run Analysis ********************************************************************************
+
+   DO s0_SDB_Product_Mapping
+
+   DO s0_SDB_Field_Mapping   
+   
+   DO s0_FTM_Field_Mapping
+
+   DO s0_CIF_Branch_Mapping
+
+   DO s0_CIF_Officer_Mapping
+
+   DO s0_CIF_Field_Mapping
+
+   DO s0_Time_Branch_Mapping
+
+   DO s0_Time_Officer_Mapping
+
+   DO s0_Time_Field_Mapping
+
+   DO s0_Loans_Branch_Mapping
+   
+   DO s0_Loans_Fee_Mapping
+
+   DO s0_Loans_Officer_Mapping
+
+   DO s0_Loans_Field_Mapping
+
+   DO s0_Tran_Branch_Mapping
+
+   DO s0_Tran_Officer_Mapping
+
+   DO s0_Tran_Product_Mapping
+
+   DO s0_Tran_Field_Mapping
+
+   DO s0_SDB_Missing_Records_Mapping
+
+   DO s0_FTM_Missing_Records_Mapping
+
+   DO s0_CIF_Missing_Records_Mapping   
+
+   DO s0_Time_Missing_Records_Mapping
+
+   DO s0_Loans_Missing_Records_Mapping
+
+   DO s0_Tran_Missing_Records_Mapping
+
+com  DO s0_Debit_Card_Field_Mapping
+
+com  DO s0_Debit_Card_Missing_Records_Mapping
+^OPEN 
 ^ROBOT 55803
 [SUBDOMAIN] heartland-financial-usa-inc
 [PROFILE] RobotsProfile
 [PORT] 10000
+[PREFIX] D:\acl\robots\aclse\
 [REGION] us
 [VERSION] 55
-[PREFIX] D:\acl\robots\aclse\
 [ADDRESS] 10.4.1.233
 [NAME] Charter Test
